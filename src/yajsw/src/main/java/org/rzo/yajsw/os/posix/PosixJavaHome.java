@@ -15,14 +15,14 @@
  *******************************************************************************/
 package org.rzo.yajsw.os.posix;
 
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.io.File;
 
 import org.apache.commons.configuration2.BaseConfiguration;
 import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.configuration2.Configuration;
 import org.rzo.yajsw.os.JavaHome;
+
+import io.netty.util.internal.logging.InternalLogger;
 
 public class PosixJavaHome implements JavaHome
 {

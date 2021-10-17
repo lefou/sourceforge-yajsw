@@ -28,7 +28,6 @@ import org.rzo.yajsw.os.Process;
 import org.rzo.yajsw.os.posix.PosixProcess;
 
 import com.sun.jna.Native;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.LongByReference;
 
 public class MacOsXProcess extends PosixProcess

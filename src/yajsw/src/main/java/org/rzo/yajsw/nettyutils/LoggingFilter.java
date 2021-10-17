@@ -15,9 +15,9 @@
  *******************************************************************************/
 package org.rzo.yajsw.nettyutils;
 
-import io.netty.handler.logging.LoggingHandler;
-
 import java.util.logging.Logger;
+
+import io.netty.handler.logging.LoggingHandler;
 
 public class LoggingFilter extends LoggingHandler
 {

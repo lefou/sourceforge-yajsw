@@ -24,12 +24,8 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
-import org.rzo.yajsw.os.OperatingSystem;
 import org.rzo.yajsw.util.DaemonThreadFactory;
 import org.rzo.yajsw.wrapper.WrappedProcess;
-
-import io.netty.util.Timeout;
-import io.netty.util.TimerTask;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -63,8 +63,11 @@ import java.util.WeakHashMap;
 
 import com.sun.jna.Callback.UncaughtExceptionHandler;
 import com.sun.jna.Structure.FFIType;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import io.netty.util.internal.logging.InternalLogLevel;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 
 /** Provides generation of invocation plumbing for a defined native
  * library interface.  Also provides various utilities for native operations.
@@ -111,13 +114,14 @@ import java.util.logging.Logger;
  */
 public final class Native implements Version {
 
-    private static final Logger LOG = Logger.getLogger(Native.class.getName());
+//    private static final Logger LOG = Logger.getLogger(Native.class.getName());
+    private static final InternalLogger LOG = InternalLoggerFactory.getInstance(Native.class.getName());
 
     public static final Charset DEFAULT_CHARSET = Charset.defaultCharset();
     public static final String DEFAULT_ENCODING = Native.DEFAULT_CHARSET.name();
     public static final boolean DEBUG_LOAD = Boolean.getBoolean("jna.debug_load");
     public static final boolean DEBUG_JNA_LOAD = Boolean.getBoolean("jna.debug_load.jna");
-    private final static Level DEBUG_JNA_LOAD_LEVEL = DEBUG_JNA_LOAD ? Level.INFO : Level.FINE;
+    private final static InternalLogLevel DEBUG_JNA_LOAD_LEVEL = DEBUG_JNA_LOAD ? InternalLogLevel.INFO : InternalLogLevel.TRACE;
 
     // Used by tests, do not remove
     static String jnidispatchPath = null;
@@ -128,7 +132,7 @@ public final class Native implements Version {
         new UncaughtExceptionHandler() {
             @Override
             public void uncaughtException(Callback c, Throwable e) {
-                LOG.log(Level.WARNING, "JNA: Callback " + c + " threw the following exception", e);
+                LOG.log(InternalLogLevel.WARN, "JNA: Callback " + c + " threw the following exception", e);
             }
         };
     private static UncaughtExceptionHandler callbackExceptionHandler = DEFAULT_HANDLER;
@@ -372,16 +376,16 @@ public final class Native implements Version {
                 charset = Charset.forName(encoding);
             }
             catch(IllegalCharsetNameException e) {
-                LOG.log(Level.WARNING, "JNA Warning: Encoding ''{0}'' is unsupported ({1})",
+                LOG.log(InternalLogLevel.WARN, "JNA Warning: Encoding ''{0}'' is unsupported ({1})",
                         new Object[]{encoding, e.getMessage()});
             }
             catch(UnsupportedCharsetException  e) {
-                LOG.log(Level.WARNING, "JNA Warning: Encoding ''{0}'' is unsupported ({1})",
+                LOG.log(InternalLogLevel.WARN, "JNA Warning: Encoding ''{0}'' is unsupported ({1})",
                         new Object[]{encoding, e.getMessage()});
             }
         }
         if (charset == null) {
-            LOG.log(Level.WARNING, "JNA Warning: Using fallback encoding {0}", Native.DEFAULT_CHARSET);
+            LOG.log(InternalLogLevel.WARN, "JNA Warning: Using fallback encoding {0}", Native.DEFAULT_CHARSET);
             charset = Native.DEFAULT_CHARSET;
         }
         return charset;
@@ -664,6 +668,7 @@ public final class Native implements Version {
                     if (field.getType() == cls
                         && Modifier.isStatic(field.getModifiers())) {
                         // Ensure the field gets initialized by reading it
+                        field.setAccessible(true); // interface might be private
                         libraries.put(cls, new WeakReference<Object>(field.get(null)));
                         break;
                     }
@@ -919,7 +924,7 @@ public final class Native implements Version {
                 removeTemporaryFiles();
             }
             catch(IOException e) {
-                LOG.log(Level.WARNING, "JNA Warning: IOException removing temporary files", e);
+                LOG.log(InternalLogLevel.WARN, "JNA Warning: IOException removing temporary files", e);
             }
         }
 
@@ -967,7 +972,7 @@ public final class Native implements Version {
                             LOG.log(DEBUG_JNA_LOAD_LEVEL, "Found jnidispatch at {0}", path);
                             return;
                         } catch (UnsatisfiedLinkError ex) {
-                            LOG.log(Level.WARNING, "File found at " + path + " but not loadable: " + ex.getMessage(), ex);
+                            LOG.log(InternalLogLevel.WARN, "File found at " + path + " but not loadable: " + ex.getMessage(), ex);
                         }
                     }
                 }
@@ -1067,8 +1072,8 @@ public final class Native implements Version {
      */
     public static File extractFromResourcePath(String name, ClassLoader loader) throws IOException {
 
-        final Level DEBUG = (DEBUG_LOAD
-            || (DEBUG_JNA_LOAD && name.contains("jnidispatch"))) ? Level.INFO : Level.FINE;
+        final InternalLogLevel DEBUG = (DEBUG_LOAD
+            || (DEBUG_JNA_LOAD && name.contains("jnidispatch"))) ? InternalLogLevel.INFO : InternalLogLevel.TRACE;
         if (loader == null) {
             loader = Thread.currentThread().getContextClassLoader();
             // Context class loader is not guaranteed to be set
@@ -1083,9 +1088,32 @@ public final class Native implements Version {
             resourcePath = resourcePath.substring(1);
         }
         URL url = loader.getResource(resourcePath);
-        if (url == null && resourcePath.startsWith(Platform.RESOURCE_PREFIX)) {
-            // If not found with the standard resource prefix, try without it
-            url = loader.getResource(libname);
+        if (url == null) {
+            if (resourcePath.startsWith(Platform.RESOURCE_PREFIX)) {
+                // Fallback for legacy darwin behaviour: darwin was in the past
+                // special cased in that all architectures were mapped to the same
+                // prefix and it was expected, that a fat binary was present at that
+                // point, that contained all architectures.
+                if(Platform.RESOURCE_PREFIX.startsWith("darwin")) {
+                    url = loader.getResource("darwin/" + resourcePath.substring(Platform.RESOURCE_PREFIX.length() + 1));
+                }
+                if (url == null) {
+                    // If not found with the standard resource prefix, try without it
+                    url = loader.getResource(libname);
+                }
+            } else if (resourcePath.startsWith("com/sun/jna/" + Platform.RESOURCE_PREFIX + "/")) {
+                // Fallback for legacy darwin behaviour: darwin was in the past
+                // special cased in that all architectures were mapped to the same
+                // prefix and it was expected, that a fat binary was present at that
+                // point, that contained all architectures.
+                if(Platform.RESOURCE_PREFIX.startsWith("com/sun/jna/darwin")) {
+                    url = loader.getResource("com/sun/jna/darwin" + resourcePath.substring(("com/sun/jna/" + Platform.RESOURCE_PREFIX).length() + 1));
+                }
+                if (url == null) {
+                    // If not found with the standard resource prefix, try without it
+                    url = loader.getResource(libname);
+                }
+            }
         }
         if (url == null) {
             String path = System.getProperty("java.class.path");
@@ -1110,7 +1138,7 @@ public final class Native implements Version {
             }
         }
         else if (!Boolean.getBoolean("jna.nounpack")) {
-            InputStream is = loader.getResourceAsStream(resourcePath);
+            InputStream is = url.openStream();
             if (is == null) {
                 throw new IOException("Can't obtain InputStream for " + resourcePath);
             }
@@ -1270,7 +1298,7 @@ public final class Native implements Version {
     */
     static File getTempDir() throws IOException {
         File jnatmp;
-        //String prop = System.getProperty("jna.tmpdir");
+//        String prop = System.getProperty("jna.tmpdir");
         String prop = System.getProperty("jna_tmpdir");
         if (prop != null) {
         	prop = prop.replaceAll("\"", "");
@@ -1278,11 +1306,7 @@ public final class Native implements Version {
             jnatmp.mkdirs();
         }
         else {
-            //File tmp = new File(System.getProperty("java.io.tmpdir"));
-        	prop = System.getProperty("java.io.tmpdir");
-        	prop = prop.replaceAll("\"", "");
-            File tmp = new File(prop);
-
+            File tmp = new File(System.getProperty("java.io.tmpdir"));
             if(Platform.isMac()) {
                 // https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html
                 jnatmp = new File(System.getProperty("user.home"), "Library/Caches/JNA/temp");
@@ -1776,27 +1800,27 @@ public final class Native implements Version {
                     // FFIType.get() always looks up the native type for any given
                     // class, so if we actually have conversion into a Java
                     // object, make sure we use the proper type information
-                    closure_rtype = FFIType.get(rclass.isPrimitive() ? rclass : Pointer.class).peer;
-                    rtype = FFIType.get(fromNative.nativeType()).peer;
+                    closure_rtype = FFIType.get(rclass.isPrimitive() ? rclass : Pointer.class).getPointer().peer;
+                    rtype = FFIType.get(fromNative.nativeType()).getPointer().peer;
                     break;
                 case CVT_NATIVE_MAPPED:
                 case CVT_NATIVE_MAPPED_STRING:
                 case CVT_NATIVE_MAPPED_WSTRING:
                 case CVT_INTEGER_TYPE:
                 case CVT_POINTER_TYPE:
-                    closure_rtype = FFIType.get(Pointer.class).peer;
-                    rtype = FFIType.get(NativeMappedConverter.getInstance(rclass).nativeType()).peer;
+                    closure_rtype = FFIType.get(Pointer.class).getPointer().peer;
+                    rtype = FFIType.get(NativeMappedConverter.getInstance(rclass).nativeType()).getPointer().peer;
                     break;
                 case CVT_STRUCTURE:
                 case CVT_OBJECT:
-                    closure_rtype = rtype = FFIType.get(Pointer.class).peer;
+                    closure_rtype = rtype = FFIType.get(Pointer.class).getPointer().peer;
                     break;
                 case CVT_STRUCTURE_BYVAL:
-                    closure_rtype = FFIType.get(Pointer.class).peer;
-                    rtype = FFIType.get(rclass).peer;
+                    closure_rtype = FFIType.get(Pointer.class).getPointer().peer;
+                    rtype = FFIType.get(rclass).getPointer().peer;
                     break;
                 default:
-                    closure_rtype = rtype = FFIType.get(rclass).peer;
+                    closure_rtype = rtype = FFIType.get(rclass).getPointer().peer;
             }
 
             for (int t=0;t < ptypes.length;t++) {
@@ -1828,20 +1852,20 @@ public final class Native implements Version {
                     case CVT_NATIVE_MAPPED:
                     case CVT_NATIVE_MAPPED_STRING:
                     case CVT_NATIVE_MAPPED_WSTRING:
-                        atypes[t] = FFIType.get(type).peer;
-                        closure_atypes[t] = FFIType.get(Pointer.class).peer;
+                        atypes[t] = FFIType.get(type).getPointer().peer;
+                        closure_atypes[t] = FFIType.get(Pointer.class).getPointer().peer;
                         break;
                     case CVT_TYPE_MAPPER:
                     case CVT_TYPE_MAPPER_STRING:
                     case CVT_TYPE_MAPPER_WSTRING:
-                        closure_atypes[t] = FFIType.get(type.isPrimitive() ? type : Pointer.class).peer;
-                        atypes[t] = FFIType.get(toNative[t].nativeType()).peer;
+                        closure_atypes[t] = FFIType.get(type.isPrimitive() ? type : Pointer.class).getPointer().peer;
+                        atypes[t] = FFIType.get(toNative[t].nativeType()).getPointer().peer;
                         break;
                     case CVT_DEFAULT:
-                        closure_atypes[t] = atypes[t] = FFIType.get(type).peer;
+                        closure_atypes[t] = atypes[t] = FFIType.get(type).getPointer().peer;
                         break;
                     default:
-                        closure_atypes[t] = atypes[t] = FFIType.get(Pointer.class).peer;
+                        closure_atypes[t] = atypes[t] = FFIType.get(Pointer.class).getPointer().peer;
                 }
             }
             sig += ")";

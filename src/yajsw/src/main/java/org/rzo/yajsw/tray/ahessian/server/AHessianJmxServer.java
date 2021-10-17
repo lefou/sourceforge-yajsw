@@ -15,12 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.tray.ahessian.server;
 
-import io.netty.channel.Channel;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.oio.OioServerSocketChannel;
-import io.netty.handler.ipfilter.IpFilterRuleList;
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.util.HashSet;
@@ -36,6 +30,11 @@ import org.rzo.netty.ahessian.application.jmx.remote.service.JmxSerializerFactor
 import org.rzo.netty.ahessian.bootstrap.ChannelPipelineFactoryBuilder;
 import org.rzo.netty.ahessian.bootstrap.DefaultServer;
 import org.rzo.netty.mcast.discovery.DiscoveryServer;
+
+import io.netty.channel.Channel;
+import io.netty.channel.socket.oio.OioServerSocketChannel;
+import io.netty.handler.ipfilter.IpFilterRuleList;
+import io.netty.util.internal.logging.InternalLogger;
 
 public class AHessianJmxServer
 {

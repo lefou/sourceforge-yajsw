@@ -16,8 +16,6 @@
 
 package org.rzo.yajsw.tray;
 
-import io.netty.util.internal.logging.SimpleLogger;
-
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
@@ -36,6 +34,8 @@ import org.rzo.yajsw.tray.ahessian.client.AHessianJmxClient;
 import org.rzo.yajsw.util.Utils;
 import org.rzo.yajsw.wrapper.AbstractWrappedProcessMBean;
 import org.rzo.yajsw.wrapper.TrayIconProxy.Types;
+
+import io.netty.util.internal.logging.SimpleLogger;
 
 // TODO: Auto-generated Javadoc
 /**

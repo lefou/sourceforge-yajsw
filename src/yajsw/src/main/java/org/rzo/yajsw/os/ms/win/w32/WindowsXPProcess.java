@@ -25,7 +25,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,9 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import jnacontrib.jna.Advapi32;
-import jnacontrib.jna.Options;
 
 import org.apache.commons.collections.map.MultiValueMap;
 import org.rzo.yajsw.io.CyclicBufferFileInputStream;
@@ -81,6 +77,9 @@ import com.sun.jna.ptr.LongByReference;
 import com.sun.jna.ptr.NativeLongByReference;
 import com.sun.jna.ptr.PointerByReference;
 import com.sun.jna.win32.StdCallLibrary;
+
+import jnacontrib.jna.Advapi32;
+import jnacontrib.jna.Options;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -1431,7 +1430,7 @@ public class WindowsXPProcess extends AbstractProcess
 		}
 	}
 
-	public interface MyAdvapi extends Advapi32
+	public interface MyAdvapi extends jnacontrib.jna.Advapi32
 	{
 		MyAdvapi INSTANCE = (MyAdvapi) Native.loadLibrary("Advapi32",
 				MyAdvapi.class, Options.UNICODE_OPTIONS);

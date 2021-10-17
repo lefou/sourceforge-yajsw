@@ -15,14 +15,14 @@
  *******************************************************************************/
 package org.rzo.yajsw.controller.jvm;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.ByteToMessageDecoder;
-
 import java.nio.charset.Charset;
 import java.util.List;
 
 import org.rzo.yajsw.controller.Message;
+
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.ByteToMessageDecoder;
 
 public class MessageDecoder extends ByteToMessageDecoder
 {

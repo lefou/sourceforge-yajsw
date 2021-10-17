@@ -21,9 +21,6 @@ import org.apache.commons.configuration2.Configuration;
 import org.rzo.yajsw.os.Mouse;
 import org.rzo.yajsw.os.OperatingSystem;
 
-import com.sun.jna.platform.unix.LibC;
-import com.sun.jna.platform.win32.Kernel32Util;
-
 public abstract class OperatingSystemPosix extends OperatingSystem
 {
 	@Override

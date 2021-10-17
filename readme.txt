@@ -1,12 +1,11 @@
-yajsw-alpha-13.00
+yajsw-beta-13.01
 
-    * Support for java 8+
-    * support for running modules (jpms)
-    * genConfig support for command lines with -p and -m 
-
-Notes:
-this is the first alpha release to support java 8+ and jpms.
-pls test it with your current applications, with java 9+ and modules.
-
-for running a module see jpms support in the documentation
-to build yajsw see the note in the documentation.
+    * Update netty: netty-all-4.1.68.Final
+    * Update jna: jna-5.9.0
+    * Update groovy: groovy-4.0.0-beta-1
+    * Update commons.io: 2.11.0
+    * java9+: remove warning: "could not find rt.jar"
+    * Posix: error setting log file umask
+    * Error parsing java command line
+    * Error evaluating groovy script in 12.16
+    * wrapper.ping.timeout = 0 should mean no ping check

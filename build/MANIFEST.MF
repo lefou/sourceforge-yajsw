@@ -3,14 +3,14 @@ Class-Path-Wrapper-Core:
  ./wrapperApp.jar 
  ./lib/core/permit/permit-reflect-0.4.jar 
  ./lib/core/yajsw/ahessian.jar 
- ./lib/core/netty/netty-all-4.1.63.Final.jar 
- ./lib/core/jna/jna-5.3.1.jar 
- ./lib/core/jna/jna-platform-5.3.1.jar 
+ ./lib/core/netty/netty-all-4.1.68.Final.jar 
+ ./lib/core/jna/jna-5.9.0.jar 
+ ./lib/core/jna/jna-platform-5.9.0.jar 
  ./lib/core/commons/commons-configuration2-2.7.jar 
  ./lib/core/commons/commons-text-1.9.jar 
  ./lib/core/commons/commons-vfs2-2.2.jar 
  ./lib/core/commons/commons-collections-3.2.2.jar 
- ./lib/core/commons/commons-io-2.6.jar 
+ ./lib/core/commons/commons-io-2.11.0.jar 
  ./lib/core/commons/commons-lang3-3.8.1.jar 
  ./lib/core/commons/commons-lang-2.6.jar 
  ./lib/core/commons/commons-logging-1.1.jar 
@@ -18,7 +18,7 @@ Class-Path-Wrapper-Core:
   
 Class-Path-Wrapper-Extended: 
  ./lib/extended/groovy/groovy-patch.jar 
- ./lib/extended/groovy/groovy-4.0.0-alpha-3.jar 
+ ./lib/extended/groovy/groovy-4.0.0-beta-1.jar 
  ./lib/extended/commons/commons-httpclient-4.5.13.jar 
  ./lib/extended/commons/commons-codec-1.15.jar 
  ./lib/extended/commons/commons-net-3.2.jar 
@@ -48,18 +48,18 @@ Class-Path-App:
  ./wrapper.jar 
  ./lib/core/permit/permit-reflect-0.4.jar 
  ./lib/core/yajsw/ahessian.jar 
- ./lib/core/netty/netty-all-4.1.63.Final.jar 
+ ./lib/core/netty/netty-all-4.1.68.Final.jar 
  ./lib/core/commons/commons-text-1.9.jar 
  ./lib/core/commons/commons-configuration2-2.7.jar  
  ./lib/core/commons/commons-vfs2-2.2.jar 
  ./lib/core/commons/commons-collections-3.2.2.jar 
- ./lib/core/commons/commons-io-2.6.jar 
+ ./lib/core/commons/commons-io-2.11.0.jar 
  ./lib/core/commons/commons-lang3-3.8.1.jar 
  ./lib/core/commons/commons-logging-1.1.jar
   
 Class-Path-App-Extended: 
  ./lib/extended/groovy/groovy-patch.jar 
- ./lib/extended/groovy/groovy-4.0.0-alpha-3.jar
+ ./lib/extended/groovy/groovy-4.0.0-beta-1.jar
  
 Main-Class: org.rzo.yajsw.boot.WrapperExeBooter
 

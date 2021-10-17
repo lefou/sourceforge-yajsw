@@ -18,6 +18,8 @@
 
 package org.rzo.yajsw.wrapper;
 
+import static java.nio.CharBuffer.wrap;
+
 import java.nio.CharBuffer;
 import java.text.Collator;
 import java.util.Arrays;
@@ -25,8 +27,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-
-import static java.nio.CharBuffer.wrap;
 
 public class AlphaNumericComparator implements Comparator<CharSequence> {
 

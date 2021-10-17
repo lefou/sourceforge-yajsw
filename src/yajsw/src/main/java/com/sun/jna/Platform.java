@@ -24,8 +24,11 @@ package com.sun.jna;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import io.netty.util.internal.logging.InternalLogLevel;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 
 /** Provide simplified platform information. */
 public final class Platform {
@@ -129,8 +132,9 @@ public final class Platform {
         RO_FIELDS = osType != WINDOWSCE;
         C_LIBRARY_NAME = osType == WINDOWS ? "msvcrt" : osType == WINDOWSCE ? "coredll" : "c";
         MATH_LIBRARY_NAME = osType == WINDOWS ? "msvcrt" : osType == WINDOWSCE ? "coredll" : "m";
-        HAS_DLL_CALLBACKS = osType == WINDOWS;
         ARCH = getCanonicalArchitecture(System.getProperty("os.arch"), osType);
+        // Windows aarch64 callbacks disabled via ASMFN_OFF (no mingw support)
+        HAS_DLL_CALLBACKS = osType == WINDOWS && !ARCH.startsWith("aarch");
         RESOURCE_PREFIX = getNativeLibraryResourcePrefix();
     }
     private Platform() { }
@@ -194,7 +198,8 @@ public final class Platform {
             || "ppc64".equals(ARCH) || "ppc64le".equals(ARCH)
             || "sparcv9".equals(ARCH)
             || "mips64".equals(ARCH) || "mips64el".equals(ARCH)
-            || "amd64".equals(ARCH)) {
+            || "amd64".equals(ARCH)
+            || "aarch64".equals(ARCH)) {
             return true;
         }
         return Native.POINTER_SIZE == 8;
@@ -215,7 +220,7 @@ public final class Platform {
     }
 
     public static final boolean isARM() {
-        return ARCH.startsWith("arm");
+        return ARCH.startsWith("arm") || ARCH.startsWith("aarch");
     }
 
     public static final boolean isSPARC() {
@@ -268,10 +273,10 @@ public final class Platform {
             }
         } catch (IOException ex) {
             // asume hardfloat
-            Logger.getLogger(Platform.class.getName()).log(Level.INFO, "Failed to read '/proc/self/exe' or the target binary.", ex);
+        	 InternalLoggerFactory.getInstance(Platform.class.getName()).log(InternalLogLevel.INFO, "Failed to read '/proc/self/exe' or the target binary.", ex);
         } catch (SecurityException ex) {
             // asume hardfloat
-            Logger.getLogger(Platform.class.getName()).log(Level.INFO, "SecurityException while analysing '/proc/self/exe' or the target binary.", ex);
+        	 InternalLoggerFactory.getInstance(Platform.class.getName()).log(InternalLogLevel.INFO, "SecurityException while analysing '/proc/self/exe' or the target binary.", ex);
         }
         return false;
     }
@@ -311,7 +316,7 @@ public final class Platform {
                 osPrefix = "w32ce-" + arch;
                 break;
             case Platform.MAC:
-                osPrefix = "darwin";
+                osPrefix = "darwin-" + arch;
                 break;
             case Platform.LINUX:
                 osPrefix = "linux-" + arch;

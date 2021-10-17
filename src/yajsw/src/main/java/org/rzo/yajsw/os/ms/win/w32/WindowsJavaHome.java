@@ -16,16 +16,11 @@
 
 package org.rzo.yajsw.os.ms.win.w32;
 
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-
-import jnacontrib.win32.Registry;
-import jnacontrib.win32.Registry.REGISTRY_ROOT_KEY;
 
 import org.apache.commons.configuration2.BaseConfiguration;
 import org.apache.commons.configuration2.Configuration;
@@ -33,6 +28,10 @@ import org.rzo.yajsw.boot.WrapperLoader;
 import org.rzo.yajsw.os.JavaHome;
 
 import com.sun.jna.Platform;
+
+import io.netty.util.internal.logging.InternalLogger;
+import jnacontrib.win32.Registry;
+import jnacontrib.win32.Registry.REGISTRY_ROOT_KEY;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -15,16 +15,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
-import jnacontrib.jna.Advapi32;
-import jnacontrib.jna.Advapi32.ENUM_SERVICE_STATUS_PROCESS;
-import jnacontrib.jna.Advapi32.QUERY_SERVICE_CONFIG;
-import jnacontrib.jna.Advapi32.SERVICE_DELAYED_AUTO_START_INFO;
-import jnacontrib.jna.Advapi32.SERVICE_DESCRIPTION;
-import jnacontrib.jna.Advapi32.SERVICE_FAILURE_ACTIONS;
-import jnacontrib.jna.WINERROR;
-import jnacontrib.jna.WINNT;
-import jnacontrib.jna.WINSVC;
-
 import org.rzo.yajsw.os.Service;
 import org.rzo.yajsw.os.ServiceInfo;
 import org.rzo.yajsw.os.ServiceInfoImpl;
@@ -44,6 +34,16 @@ import com.sun.jna.platform.win32.Winsvc.SERVICE_STATUS_PROCESS;
 import com.sun.jna.ptr.IntByReference;
 //import jnacontrib.jna.Advapi32.SERVICE_STATUS_PROCESS.SERVICE_DELAYED_AUTO_START_INFO;
 //import jnacontrib.jna.Advapi32.SERVICE_STATUS_PROCESS;
+
+import jnacontrib.jna.Advapi32;
+import jnacontrib.jna.Advapi32.ENUM_SERVICE_STATUS_PROCESS;
+import jnacontrib.jna.Advapi32.QUERY_SERVICE_CONFIG;
+import jnacontrib.jna.Advapi32.SERVICE_DELAYED_AUTO_START_INFO;
+import jnacontrib.jna.Advapi32.SERVICE_DESCRIPTION;
+import jnacontrib.jna.Advapi32.SERVICE_FAILURE_ACTIONS;
+import jnacontrib.jna.WINERROR;
+import jnacontrib.jna.WINNT;
+import jnacontrib.jna.WINSVC;
 
 /**
  * Baseclass for a Win32 service.

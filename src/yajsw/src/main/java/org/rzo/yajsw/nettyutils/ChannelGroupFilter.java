@@ -15,14 +15,14 @@
  *******************************************************************************/
 package org.rzo.yajsw.nettyutils;
 
+import java.net.SocketAddress;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelOutboundHandlerAdapter;
 import io.netty.channel.ChannelPromise;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.concurrent.GlobalEventExecutor;
-
-import java.net.SocketAddress;
 
 public class ChannelGroupFilter extends ChannelOutboundHandlerAdapter
 {

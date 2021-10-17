@@ -15,9 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.controller.jvm;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
-
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -26,6 +23,9 @@ import org.rzo.yajsw.Constants;
 import org.rzo.yajsw.config.VarInterpolator;
 import org.rzo.yajsw.controller.Message;
 import org.rzo.yajsw.util.DaemonThreadFactory;
+
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 
 public class ControllerHandler extends ChannelInboundHandlerAdapter implements
 		Constants

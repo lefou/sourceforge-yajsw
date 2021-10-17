@@ -24,8 +24,6 @@ import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.Semaphore;
 
-import jnacontrib.jna.Options;
-
 import org.apache.commons.collections.BidiMap;
 import org.apache.commons.collections.bidimap.DualHashBidiMap;
 import org.apache.commons.collections.map.MultiValueMap;
@@ -40,6 +38,8 @@ import com.sun.jna.Structure;
 import com.sun.jna.platform.win32.GDI32;
 import com.sun.jna.platform.win32.Kernel32;
 import com.sun.jna.ptr.PointerByReference;
+
+import jnacontrib.jna.Options;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -15,8 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.wrapper;
 
-import io.netty.util.internal.logging.SimpleLoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -48,6 +46,8 @@ import org.rzo.yajsw.os.posix.PosixService;
 import org.rzo.yajsw.util.Utils;
 
 import com.sun.jna.PlatformEx;
+
+import io.netty.util.internal.logging.SimpleLoggerFactory;
 
 public class WrappedService
 {

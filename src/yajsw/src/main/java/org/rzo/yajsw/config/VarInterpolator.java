@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.interpol.ConfigurationInterpolator;
-import org.rzo.yajsw.config.YajswConfigurationInterpolator;
 import org.rzo.yajsw.util.MyKeyStoreInterface;
 
 import io.netty.util.internal.logging.InternalLogger;

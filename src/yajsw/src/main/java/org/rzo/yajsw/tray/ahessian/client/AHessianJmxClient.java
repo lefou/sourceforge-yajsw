@@ -15,10 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.tray.ahessian.client;
 
-import io.netty.channel.Channel;
-import io.netty.channel.socket.oio.OioSocketChannel;
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -41,6 +37,10 @@ import org.rzo.netty.ahessian.rpc.server.HessianRPCServiceHandler.ConnectListene
 import org.rzo.netty.ahessian.utils.MyReentrantLock;
 import org.rzo.netty.mcast.discovery.DiscoveryClient;
 import org.rzo.netty.mcast.discovery.DiscoveryListener;
+
+import io.netty.channel.Channel;
+import io.netty.channel.socket.oio.OioSocketChannel;
+import io.netty.util.internal.logging.InternalLogger;
 
 public class AHessianJmxClient
 {

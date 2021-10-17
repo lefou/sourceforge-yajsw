@@ -15,8 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.action;
 
-import io.netty.channel.Channel;
-
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.HashSet;
@@ -25,6 +23,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.rzo.yajsw.controller.Message;
+
+import io.netty.channel.Channel;
 
 public class ThreadDumpImpl5 implements Action
 {

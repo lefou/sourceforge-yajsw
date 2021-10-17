@@ -31,7 +31,6 @@ import org.rzo.yajsw.os.Process;
 import org.rzo.yajsw.os.posix.PosixProcess;
 
 import com.sun.jna.FromNativeConverter;
-import com.sun.jna.ptr.IntByReference;
 import com.sun.jna.ptr.LongByReference;
 
 public class BSDProcess extends PosixProcess

@@ -15,11 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.wrapper;
 
-import io.netty.util.internal.logging.InternalLogger;
-import io.netty.util.internal.logging.InternalLoggerFactory;
-import io.netty.util.internal.logging.JdkLogger2Factory;
-import io.netty.util.internal.logging.SimpleLoggerFactory;
-
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
@@ -32,12 +27,10 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
-import java.net.InetAddress;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import java.security.AccessController;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -114,6 +107,11 @@ import org.rzo.yajsw.util.VFSUtils;
 
 import com.sun.jna.Platform;
 import com.sun.jna.PlatformEx;
+
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+import io.netty.util.internal.logging.JdkLogger2Factory;
+import io.netty.util.internal.logging.SimpleLoggerFactory;
 
 public abstract class AbstractWrappedProcess implements WrappedProcess,
 		Constants, AbstractWrappedProcessMBean
@@ -998,7 +996,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 
 	protected boolean exitSignalShutdown()
 	{
-		if (_shutdownSignalCodes.contains(_osProcess.getExitSignal()))
+		if (_osProcess.getExitSignal() != -1 && _shutdownSignalCodes.contains(_osProcess.getExitSignal()))
 		{
 			getWrapperLogger().info("shutdown wrapper due to exit signal rule");
 			return true;
@@ -1625,6 +1623,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 			boolean desc = _config.getBoolean("wrapper.logfile.desc", false);
 			int umask = Utils.parseOctal(_config.getString(
 					"wrapper.logfile.umask", null));
+			System.out.println("wrapper.logfile.umask "+umask);
 			String encoding = _config.getString("wrapper.log.encoding");
 			boolean compress = _config.getBoolean("wrapper.logfile.compress", false);
 			int maxDays = _config.getInt("wrapper.logfile.maxdays", -1);

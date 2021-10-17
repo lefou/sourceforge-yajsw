@@ -177,6 +177,8 @@ public class MyFileHandler extends StreamHandler
 	public MyFileHandler() throws IOException
 	{
 		init(null, null, null, null);
+		System.out.println("MyFilleHandler0 "+umask);
+
 	}
 
 	// init properties
@@ -194,6 +196,7 @@ public class MyFileHandler extends StreamHandler
 	{
 
 		int prevUmask = -1;
+		System.out.println("initOutputFiles: "+umask);
 		if (umask != -1)
 			prevUmask = OperatingSystem.instance().processManagerInstance()
 					.umask(umask);
@@ -400,6 +403,7 @@ public class MyFileHandler extends StreamHandler
 			len = (int) fname.length();
 		}
 		int prevUmask = -1;
+		System.out.println("open umask "+umask);
 		if (umask != -1)
 			prevUmask = OperatingSystem.instance().processManagerInstance()
 					.umask(umask);
@@ -680,6 +684,8 @@ public class MyFileHandler extends StreamHandler
 		}
 		init(pattern, null, Integer.valueOf(DEFAULT_LIMIT),
 				Integer.valueOf(DEFAULT_COUNT));
+		System.out.println("MyFilleHandler6 "+umask);
+
 	}
 
 	/**
@@ -709,6 +715,8 @@ public class MyFileHandler extends StreamHandler
 		}
 		init(pattern, Boolean.valueOf(append), Integer.valueOf(DEFAULT_LIMIT),
 				Integer.valueOf(DEFAULT_COUNT));
+		System.out.println("MyFilleHandler1 "+umask);
+
 	}
 
 	/**
@@ -746,6 +754,8 @@ public class MyFileHandler extends StreamHandler
 			throw new IllegalArgumentException("limit < 0 || count < 1");
 		}
 		init(pattern, null, Integer.valueOf(limit), Integer.valueOf(count));
+		System.out.println("MyFilleHandler5 "+umask);
+
 	}
 
 	/**
@@ -788,6 +798,8 @@ public class MyFileHandler extends StreamHandler
 		}
 		init(pattern, Boolean.valueOf(append), Integer.valueOf(limit),
 				Integer.valueOf(count));
+		System.out.println("MyFilleHandler3 "+umask);
+
 	}
 
 	public MyFileHandler(String pattern, int limit, int count, boolean append,
@@ -797,19 +809,30 @@ public class MyFileHandler extends StreamHandler
 		this.desc = desc;
 		this.umask = umask;
 		_compress =compress;
+		System.out.println("MyFilleHandler2 "+umask);
 	}
 
 	public MyFileHandler(String pattern, int limit, int count, boolean append,
 			PatternFormatter fileFormatter, Level logLevel, String encoding,
 			boolean desc, int umask, boolean compress) throws IOException
 	{
-		this(pattern, limit, count, append, compress);
+		_compress = compress;
+		if (pattern.isEmpty())
+		{
+			throw new IllegalArgumentException("Pattern cannot be empty");
+		}
+		if (limit < 0 || count < 1)
+		{
+			throw new IllegalArgumentException("limit < 0 || count < 1");
+		}
 		this.desc = desc;
 		this.umask = umask;
 		if (encoding != null)
 			setEncoding(encoding);
 		setFormatter(fileFormatter);
 		setLevel(logLevel);
+		init(pattern, Boolean.valueOf(append), Integer.valueOf(limit),
+				Integer.valueOf(count));
 	}
 
 	/**

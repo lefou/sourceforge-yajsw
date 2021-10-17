@@ -31,7 +31,6 @@ import org.apache.commons.configuration2.ConfigurationConverter;
 import org.apache.commons.configuration2.EnvironmentConfiguration;
 import org.apache.commons.io.filefilter.WildcardFileFilter;
 
-
 import com.sun.jna.Platform;
 
 // TODO: Auto-generated Javadoc

@@ -49,7 +49,6 @@ import org.rzo.yajsw.os.posix.PosixProcess.CLibrary.Sysinfo;
 import org.rzo.yajsw.util.DaemonThreadFactory;
 
 import com.sun.jna.FromNativeConverter;
-import com.sun.jna.Library;
 import com.sun.jna.Memory;
 import com.sun.jna.Native;
 import com.sun.jna.NativeLibrary;
@@ -2095,6 +2094,7 @@ public class PosixProcess extends AbstractProcess {
 
 	public static int umask(int mask) {
 		int result = CLibrary.INSTANCE.umask(mask);
+		System.out.println("umask "+mask +"->"+result);
 		return result;
 	}
 

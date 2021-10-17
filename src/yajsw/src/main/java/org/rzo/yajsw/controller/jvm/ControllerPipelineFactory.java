@@ -15,13 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.controller.jvm;
 
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelPipeline;
-import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.codec.DelimiterBasedFrameDecoder;
-import io.netty.handler.codec.Delimiters;
-
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
@@ -35,6 +28,13 @@ import org.rzo.yajsw.nettyutils.Condition;
 import org.rzo.yajsw.nettyutils.ConditionFilter;
 import org.rzo.yajsw.nettyutils.LoggingFilter;
 import org.rzo.yajsw.nettyutils.WhitelistFilter;
+
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelPipeline;
+import io.netty.channel.socket.SocketChannel;
+import io.netty.handler.codec.DelimiterBasedFrameDecoder;
+import io.netty.handler.codec.Delimiters;
 
 class ControllerPipelineFactory extends ChannelInitializer<SocketChannel>
 {

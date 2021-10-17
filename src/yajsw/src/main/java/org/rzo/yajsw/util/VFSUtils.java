@@ -15,8 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.util;
 
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,6 +31,8 @@ import org.apache.commons.vfs2.cache.OnCallRefreshFileObject;
 import org.apache.commons.vfs2.impl.DefaultFileSystemManager;
 import org.apache.commons.vfs2.provider.http.HttpFileSystemConfigBuilder;
 import org.apache.commons.vfs2.provider.local.LocalFile;
+
+import io.netty.util.internal.logging.InternalLogger;
 
 public class VFSUtils
 {

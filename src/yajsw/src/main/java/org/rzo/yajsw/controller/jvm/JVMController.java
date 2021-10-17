@@ -16,15 +16,6 @@
 
 package org.rzo.yajsw.controller.jvm;
 
-import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelOption;
-import io.netty.channel.EventLoopGroup;
-import io.netty.channel.oio.OioEventLoopGroup;
-import io.netty.channel.socket.oio.OioServerSocketChannel;
-import io.netty.util.concurrent.Future;
-
 import java.net.InetAddress;
 import java.util.Collections;
 import java.util.Set;
@@ -44,6 +35,15 @@ import org.rzo.yajsw.util.DaemonThreadFactory;
 import org.rzo.yajsw.util.Utils;
 import org.rzo.yajsw.wrapper.WrappedJavaProcess;
 import org.rzo.yajsw.wrapper.WrappedProcess;
+
+import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
+import io.netty.channel.oio.OioEventLoopGroup;
+import io.netty.channel.socket.oio.OioServerSocketChannel;
+import io.netty.util.concurrent.Future;
 
 // TODO: Auto-generated Javadoc
 /**

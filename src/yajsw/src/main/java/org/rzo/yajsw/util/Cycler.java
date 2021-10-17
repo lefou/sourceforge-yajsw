@@ -33,6 +33,8 @@ public class Cycler
 	{
 		if (runnable == null || executor == null)
 			throw new NullPointerException();
+		if (period == 0)
+			period = Long.MAX_VALUE;
 		_period = checkDuration(period, 100);
 		_delay = checkDuration(delay, 0);
 		_executor = executor;

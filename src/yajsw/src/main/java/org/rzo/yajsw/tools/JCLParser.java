@@ -463,6 +463,8 @@ public class JCLParser
 			String opt = s.get(i);
 			if (CPM_KEYS.contains(opt))
 			{
+				if ("-jar".equals(opt))
+					break;
 				i++;
 				continue;
 			}
@@ -559,6 +561,7 @@ public class JCLParser
 	public static void main(String[] args)
 	{
 		String[] wcmds = new String[] {
+				"java  -Xmx512m -jar zap-2.10.0.jar -daemon",
 				"java --module-path out-jar -m com.jenkov.mymodule/com.jenkov.mymodule.Main",
 				"java -jar out-jar/com-jenkov-javafx.jar",
 				"java --module-path out;lib --module com.jenkov.mymodule/com.jenkov.mymodule.Main",

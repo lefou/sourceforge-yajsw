@@ -18,10 +18,7 @@ package org.rzo.yajsw.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.Inet4Address;
-import java.net.Inet6Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.logging.Logger;
 
@@ -31,8 +28,6 @@ import org.rzo.yajsw.wrapper.WrappedProcess;
 import org.rzo.yajsw.wrapper.WrappedService;
 
 import com.sun.jna.PlatformEx;
-
-import sun.net.InetAddressCachePolicy;
 
 public class Utils
 {
@@ -108,6 +103,15 @@ public class Utils
 				System.out
 						.println("!! WARNING !! Windows JDK7 should set -Djava.net.preferIPv4Stack=true (see java bug 7179799 )");
 		}
+	}
+	
+	public static boolean requiredRTjar()
+	{
+		String jvm = System.getProperty("java.version");
+		if (jvm.startsWith("1."))
+			return true;
+		return false;
+		
 	}
 
 	public static String getDOption(String key, String value)

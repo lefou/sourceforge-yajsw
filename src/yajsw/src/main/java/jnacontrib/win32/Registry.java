@@ -15,15 +15,15 @@ import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import jnacontrib.jna.Advapi32;
-import jnacontrib.jna.WINERROR;
-
 import com.sun.jna.platform.win32.WinBase;
 import com.sun.jna.platform.win32.WinNT;
 import com.sun.jna.platform.win32.WinReg;
 import com.sun.jna.platform.win32.WinReg.HKEY;
 import com.sun.jna.platform.win32.WinReg.HKEYByReference;
 import com.sun.jna.ptr.IntByReference;
+
+import jnacontrib.jna.Advapi32;
+import jnacontrib.jna.WINERROR;
 
 /**
  * Methods for accessing the Windows Registry. Only String and DWORD values

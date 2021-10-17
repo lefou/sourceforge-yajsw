@@ -20,17 +20,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.configuration2.Configuration;
+import org.rzo.yajsw.os.AbstractService;
+import org.rzo.yajsw.os.Service;
+import org.rzo.yajsw.os.ServiceInfo;
+
 import jnacontrib.jna.Advapi32;
 import jnacontrib.jna.Advapi32.ENUM_SERVICE_STATUS_PROCESS;
 import jnacontrib.jna.Advapi32.SC_ACTION;
 import jnacontrib.jna.Advapi32.SERVICE_FAILURE_ACTIONS;
 import jnacontrib.win32.Win32Service;
-
-import org.rzo.yajsw.os.AbstractService;
-import org.rzo.yajsw.os.Service;
-import org.rzo.yajsw.os.ServiceInfo;
-
-import org.apache.commons.configuration2.Configuration;
 
 public class WindowsXPService extends AbstractService
 {

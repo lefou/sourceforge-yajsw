@@ -241,7 +241,7 @@ public class WrapperLoader
 		}
 
 		// add rt.jar
-		if ("App".equals(type))
+		if ("App".equals(type)  && requiredRTjar())
 			try
 			{
 				String rt = getRTJar();
@@ -279,6 +279,17 @@ public class WrapperLoader
 		return urlsArr;
 
 	}
+	
+	public static boolean requiredRTjar()
+	{
+		String jvm = System.getProperty("java.version");
+		if (jvm.startsWith("1."))
+			return true;
+		return false;
+		
+	}
+
+
 
 	public static URLClassLoader getWrapperClassLoader()
 	{

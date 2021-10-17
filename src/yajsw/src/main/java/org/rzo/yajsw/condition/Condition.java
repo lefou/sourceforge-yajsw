@@ -15,8 +15,6 @@
  *******************************************************************************/
 package org.rzo.yajsw.condition;
 
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +27,8 @@ import org.rzo.yajsw.config.YajswConfigurationImpl;
 import org.rzo.yajsw.script.Script;
 import org.rzo.yajsw.script.ScriptFactory;
 import org.rzo.yajsw.wrapper.WrappedProcess;
+
+import io.netty.util.internal.logging.InternalLogger;
 
 public class Condition
 {

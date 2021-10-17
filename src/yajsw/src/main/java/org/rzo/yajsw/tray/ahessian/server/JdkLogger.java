@@ -15,10 +15,10 @@
  *******************************************************************************/
 package org.rzo.yajsw.tray.ahessian.server;
 
-import io.netty.util.internal.logging.AbstractInternalLogger;
-
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import io.netty.util.internal.logging.AbstractInternalLogger;
 
 /**
  * <a href=

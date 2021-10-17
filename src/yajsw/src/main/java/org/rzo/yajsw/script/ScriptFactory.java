@@ -16,11 +16,11 @@
 
 package org.rzo.yajsw.script;
 
-import io.netty.util.internal.logging.InternalLogger;
-
 import java.util.List;
 
 import org.rzo.yajsw.wrapper.WrappedProcess;
+
+import io.netty.util.internal.logging.InternalLogger;
 
 // TODO: Auto-generated Javadoc
 /**

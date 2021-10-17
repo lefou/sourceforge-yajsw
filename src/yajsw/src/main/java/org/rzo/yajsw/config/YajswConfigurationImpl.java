@@ -16,14 +16,9 @@
 
 package org.rzo.yajsw.config;
 
-import io.netty.util.internal.logging.InternalLogger;
-import io.netty.util.internal.logging.InternalLoggerFactory;
-import io.netty.util.internal.logging.SimpleLogger;
-
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Constructor;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,12 +30,8 @@ import org.apache.commons.configuration2.CompositeConfiguration;
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.ConfigurationConverter;
 import org.apache.commons.configuration2.EnvironmentConfiguration;
-import org.apache.commons.configuration2.MapConfiguration;
-import org.apache.commons.configuration2.PropertiesConfiguration;
 import org.apache.commons.configuration2.convert.DefaultListDelimiterHandler;
-import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.configuration2.interpol.ConfigurationInterpolator;
-import org.apache.commons.configuration2.io.ConfigurationLogger;
 import org.apache.commons.configuration2.io.FileOptionsProvider;
 import org.apache.commons.configuration2.io.FileSystem;
 import org.apache.commons.configuration2.io.VFSFileSystem;
@@ -49,13 +40,13 @@ import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.VFS;
 import org.apache.commons.vfs2.impl.DefaultFileSystemManager;
 import org.rzo.yajsw.config.jnlp.JnlpSupport;
-import org.rzo.yajsw.os.OperatingSystem;
 import org.rzo.yajsw.script.GroovyScript;
-import org.rzo.yajsw.util.CaseInsensitiveMap;
-import org.rzo.yajsw.util.CommonsLoggingAdapter;
 import org.rzo.yajsw.util.ConfigurationLoggingAdapter;
 import org.rzo.yajsw.util.Utils;
 import org.rzo.yajsw.util.VFSUtils;
+
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.SimpleLogger;
 
 // TODO: Auto-generated Javadoc
 /**

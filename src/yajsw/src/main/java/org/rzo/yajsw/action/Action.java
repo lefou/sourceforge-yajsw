@@ -15,12 +15,12 @@
  *******************************************************************************/
 package org.rzo.yajsw.action;
 
-import io.netty.channel.Channel;
-
 import java.io.IOException;
 import java.io.PrintStream;
 
 import org.rzo.yajsw.controller.Message;
+
+import io.netty.channel.Channel;
 
 public interface Action
 {
