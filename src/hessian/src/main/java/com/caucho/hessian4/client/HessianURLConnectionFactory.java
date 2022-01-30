@@ -80,7 +80,10 @@ public class HessianURLConnectionFactory implements HessianConnectionFactory {
   {
     if (log.isLoggable(Level.FINER))
       log.finer(this + " open(" + url + ")");
+    
+    throw new IOException("remote access disabled");
 
+    /*  not required for ahessian.
     URLConnection conn = url.openConnection();
 
     // HttpURLConnection httpConn = (HttpURLConnection) conn;
@@ -113,8 +116,9 @@ public class HessianURLConnectionFactory implements HessianConnectionFactory {
       } catch (Throwable e) {
       }
     }
-    */
+    * /
     
     return new HessianURLConnection(url, conn);
+    */
   }
 }

@@ -22,10 +22,6 @@ import groovy.lang.EmptyRange;
 import groovy.lang.IntRange;
 import groovy.lang.NumberRange;
 import groovy.lang.Range;
-import io.netty.util.internal.logging.InternalLogger;
-import io.netty.util.internal.logging.InternalLoggerFactory;
-
-import org.codehaus.groovy.runtime.RangeInfo;
 import org.codehaus.groovy.runtime.typehandling.DefaultTypeTransformation;
 
 import java.io.Closeable;
@@ -68,15 +64,14 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
-//import java.util.logging.Logger;
+import java.util.logging.Logger;
 
 /**
  * Support methods for DefaultGroovyMethods and PluginDefaultMethods.
  */
 public class DefaultGroovyMethodsSupport {
 
-    //private static final Logger LOG = Logger.getLogger(DefaultGroovyMethodsSupport.class.getName());
-    protected static final InternalLogger LOG = InternalLoggerFactory.getInstance(DefaultGroovyMethodsSupport.class.getName());
+    private static final Logger LOG = Logger.getLogger(DefaultGroovyMethodsSupport.class.getName());
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     // helper method for getAt and putAt
@@ -177,7 +172,7 @@ public class DefaultGroovyMethodsSupport {
             } catch (Exception e) {
                 thrown = e;
                 if (logWarning) {
-                    LOG.warn("Caught exception during close(): " + e);
+                    LOG.warning("Caught exception during close(): " + e);
                 }
             }
         }
@@ -270,9 +265,10 @@ public class DefaultGroovyMethodsSupport {
     }
 
     @SuppressWarnings("unchecked")
-    protected static <T> T[] createSimilarArray(T[] orig, int newCapacity) {
-        Class<T> componentType = (Class<T>) orig.getClass().getComponentType();
-        return (T[]) Array.newInstance(componentType, newCapacity);
+    protected static <T> T[] createSimilarArray(final T[] orig, final int newCapacity) {
+        Class<?> type = orig.getClass();
+        if (type == Object[].class) return (T[]) new Object[newCapacity];
+        return (T[]) Array.newInstance(type.getComponentType(), newCapacity);
     }
 
     @SuppressWarnings("unchecked")

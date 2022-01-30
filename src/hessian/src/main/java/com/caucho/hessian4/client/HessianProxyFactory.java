@@ -205,12 +205,17 @@ public class HessianProxyFactory implements ServiceProxyFactory, ObjectFactory {
    */
   public HessianConnectionFactory getConnectionFactory()
   {
+	//++++
+	  return null;
+	  
+	 /* disable remote access. this should not be invoked with ahessian.
     if (_connFactory == null) {
       _connFactory = createHessianConnectionFactory();
       _connFactory.setHessianProxyFactory(this);
     }
     
     return _connFactory;
+    */
   }
 
   /**
