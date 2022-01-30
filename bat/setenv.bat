@@ -26,7 +26,7 @@ set wrapper_bat="%wrapper_home%/bat/wrapper.bat"
 set wrapperw_bat="%wrapper_home%/bat/wrapperW.bat"
 
 rem configuration file used by all bat files
-set conf_file=%wrapper_home%/conf/wrapper.conf
+set conf_file="%wrapper_home%/conf/wrapper.conf"
 
 rem default configuration used in genConfig
 set conf_default_file="%wrapper_home%/conf/wrapper.conf.default"
