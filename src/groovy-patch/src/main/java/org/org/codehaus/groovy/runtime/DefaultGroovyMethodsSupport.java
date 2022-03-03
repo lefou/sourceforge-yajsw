@@ -64,14 +64,17 @@ import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.SynchronousQueue;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 
 /**
  * Support methods for DefaultGroovyMethods and PluginDefaultMethods.
  */
 public class DefaultGroovyMethodsSupport {
 
-    private static final Logger LOG = Logger.getLogger(DefaultGroovyMethodsSupport.class.getName());
+    //private static final Logger LOG = Logger.getLogger(DefaultGroovyMethodsSupport.class.getName());
+    private static final InternalLogger LOGGER = InternalLoggerFactory.getInstance(DefaultGroovyMethodsSupport.class.getName());
     private static final Object[] EMPTY_OBJECT_ARRAY = new Object[0];
 
     // helper method for getAt and putAt
@@ -172,7 +175,7 @@ public class DefaultGroovyMethodsSupport {
             } catch (Exception e) {
                 thrown = e;
                 if (logWarning) {
-                    LOG.warning("Caught exception during close(): " + e);
+                    LOGGER.warn("Caught exception during close(): " + e);
                 }
             }
         }

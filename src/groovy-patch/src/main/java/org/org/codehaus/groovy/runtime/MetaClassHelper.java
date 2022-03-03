@@ -24,12 +24,17 @@ import groovy.lang.GroovyObject;
 import groovy.lang.GroovyRuntimeException;
 import groovy.lang.MetaClass;
 import groovy.lang.MetaMethod;
+import io.netty.util.internal.logging.InternalLogLevel;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
+
 import org.apache.groovy.util.BeanUtils;
 import org.codehaus.groovy.reflection.CachedClass;
 import org.codehaus.groovy.reflection.ParameterTypes;
 import org.codehaus.groovy.reflection.ReflectionCache;
 import org.codehaus.groovy.runtime.wrappers.Wrapper;
 import org.codehaus.groovy.util.FastArray;
+import org.codehaus.groovy.vmplugin.VMPluginFactory;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
@@ -41,8 +46,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
 
 import static org.codehaus.groovy.reflection.stdclasses.CachedSAMClass.getSAMMethod;
 
@@ -51,7 +56,8 @@ public class MetaClassHelper {
     public static final Object[] EMPTY_ARRAY = {};
     public static final Class[] EMPTY_TYPE_ARRAY = {};
     public static final Object[] ARRAY_WITH_NULL = {null};
-    protected static final Logger LOG = Logger.getLogger(MetaClassHelper.class.getName());
+//    protected static final Logger LOG = Logger.getLogger(MetaClassHelper.class.getName());
+    protected static final InternalLogger LOGGER = InternalLoggerFactory.getInstance(VMPluginFactory.class.getName());
     private static final int MAX_ARG_LEN = 12;
     private static final int
             OBJECT_SHIFT = 23, INTERFACE_SHIFT = 0,
@@ -823,8 +829,10 @@ public class MetaClassHelper {
     public static void logMethodCall(Object object, String methodName, Object[] arguments) {
         String className = getClassName(object);
         String logname = "methodCalls." + className + "." + methodName;
-        Logger objLog = Logger.getLogger(logname);
-        if (!objLog.isLoggable(Level.FINER)) return;
+        //Logger objLog = Logger.getLogger(logname);
+        //if (!objLog.isLoggable(Level.FINER)) return;
+        InternalLogger objLog = InternalLoggerFactory.getInstance(logname);
+        if (!objLog.isInfoEnabled()) return;
         StringBuilder msg = new StringBuilder(methodName);
         msg.append("(");
         if (arguments != null) {
@@ -836,7 +844,8 @@ public class MetaClassHelper {
             }
         }
         msg.append(")");
-        objLog.logp(Level.FINER, className, msg.toString(), "called from MetaClass.invokeMethod");
+        //objLog.logp(Level.FINER, className, msg.toString(), "called from MetaClass.invokeMethod");
+        objLog.log(InternalLogLevel.INFO, className, msg.toString(), "called from MetaClass.invokeMethod");
     }
 
     protected static String normalizedValue(Object argument) {

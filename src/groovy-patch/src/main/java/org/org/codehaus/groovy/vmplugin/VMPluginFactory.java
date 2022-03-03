@@ -18,6 +18,7 @@
  */
 package org.codehaus.groovy.vmplugin;
 
+import org.apache.groovy.plugin.GroovyRunnerRegistry;
 import org.apache.groovy.util.Maps;
 import org.codehaus.groovy.runtime.DefaultGroovyMethods;
 
@@ -25,8 +26,10 @@ import java.math.BigDecimal;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+//import java.util.logging.Level;
+//import java.util.logging.Logger;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 
 import static org.codehaus.groovy.runtime.DefaultGroovyMethods.isAtLeast;
 
@@ -36,7 +39,8 @@ import static org.codehaus.groovy.runtime.DefaultGroovyMethods.isAtLeast;
  * runtime.
  */
 public class VMPluginFactory {
-    private static final Logger LOGGER = Logger.getLogger(VMPluginFactory.class.getName());
+//    private static final Logger LOGGER = Logger.getLogger(VMPluginFactory.class.getName());
+    private static final InternalLogger LOGGER = InternalLoggerFactory.getInstance(VMPluginFactory.class.getName());
     private static final Map<BigDecimal, String> PLUGIN_MAP = Maps.of(
             // Note: list the vm plugin entries in *descending* order:
             new BigDecimal("16"), "org.codehaus.groovy.vmplugin.v16.Java16",
@@ -65,8 +69,8 @@ public class VMPluginFactory {
                     try {
                         return (VMPlugin) loader.loadClass(pluginName).getDeclaredConstructor().newInstance();
                     } catch (Throwable t) {
-                        if (LOGGER.isLoggable(Level.FINE)) {
-                            LOGGER.fine("Trying to create VM plugin `" + pluginName + "`, but failed:\n" + DefaultGroovyMethods.asString(t)
+                        if (LOGGER.isInfoEnabled()) {
+                            LOGGER.info("Trying to create VM plugin `" + pluginName + "`, but failed:\n" + DefaultGroovyMethods.asString(t)
                             );
                         }
 

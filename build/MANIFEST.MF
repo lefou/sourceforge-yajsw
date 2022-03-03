@@ -23,6 +23,7 @@ Class-Path-Wrapper-Core:
   
 Class-Path-Wrapper-Extended: 
  ./lib/extended/groovy/groovy-patch.jar 
+ ./lib/extended/groovy/groovy-patch9.jar 
  ./lib/extended/groovy/groovy-4.0.0.jar 
  ./lib/extended/commons/commons-httpclient-4.5.13.jar 
  ./lib/extended/commons/commons-codec-1.15.jar 
@@ -35,12 +36,11 @@ Class-Path-Wrapper-Extended:
  ./lib/extended/cron/joda-time-2.7.jar 
  ./lib/extended/cron/yacron4j-00.03.jar 
  ./lib/extended/velocity/velocity-engine-core-2.3.jar 
- ./lib/extended/velocity/slf4j-api-1.5.0.jar 
+ ./lib/extended/slf4j/slf4j-api-1.7.30.jar 
+ ./lib/extended/slf4j/slf4j-simple-1.7.30.jar 
  ./lib/extended/jgoodies/forms-1.2.0.jar 
  ./lib/extended/vfs-webdav/jackrabbit-webdav-2.21.4.jar 
  ./lib/extended/vfs-webdav/xercesImpl.jar 
- ./lib/extended/vfs-webdav/slf4j-jdk14-1.5.0.jar 
- ./lib/extended/vfs-webdav/slf4j-api-1.5.0.jar 
  ./lib/extended/vfs-dbx/vfs-dbx-00.02.jar 
  ./lib/extended/vfs-dbx/dropbox-core-sdk-1.7.7.jar 
  ./lib/extended/vfs-dbx/jackson-core-2.11.3.jar 
@@ -69,6 +69,7 @@ Class-Path-App:
   
 Class-Path-App-Extended: 
  ./lib/extended/groovy/groovy-patch.jar 
+ ./lib/extended/groovy/groovy-patch9.jar 
  ./lib/extended/groovy/groovy-4.0.0.jar
  
 Main-Class: org.rzo.yajsw.boot.WrapperExeBooter

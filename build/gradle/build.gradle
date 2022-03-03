@@ -26,7 +26,7 @@ ext {
 	formsrt_version 				= ''
 	forms_version 					= '1.2.0'
 	velocity_version 				= 'engine-core-2.3'
-	slf4j_version 					= 'api-1.5.0'
+	slf4j_version 					= 'api-1.7.30'
 	glazedlists_version 			= '1.10.0_java16'
 	commons_beanutils_version 		= '1.9.3'
 	yacron4j_version 				= '00.03'
@@ -59,6 +59,7 @@ repositories {
     "$extendedLibsDir/abeille",
     "$extendedLibsDir/jgoodies",
     "$extendedLibsDir/glazedlists",
+    "$extendedLibsDir/slf4j",
     "$extendedLibsDir/velocity"
     
     }

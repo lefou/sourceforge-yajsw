@@ -1,10 +1,7 @@
-yajsw-stable-13.02
+yajsw-stable-13.03
 
-
-    Update netty: 4.1.73.Final
-    Update groovy: 4.0.0
-    Update jna: 5.10.0
-    setenv: bat: issue if blank in path
+    * Update slf4j: 1.7.30
+    * Bug: Problem running jboss wildfly with jdk 11
 
 Note: support the project by donating:
 

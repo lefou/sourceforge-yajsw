@@ -159,7 +159,9 @@ import java.util.TimerTask;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.concurrent.BlockingQueue;
-import java.util.logging.Logger;
+//import java.util.logging.Logger;
+import io.netty.util.internal.logging.InternalLogger;
+import io.netty.util.internal.logging.InternalLoggerFactory;
 
 import static groovy.lang.groovydoc.Groovydoc.EMPTY_GROOVYDOC;
 
@@ -180,6 +182,7 @@ import static groovy.lang.groovydoc.Groovydoc.EMPTY_GROOVYDOC;
  */
 public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
 
+    private static final InternalLogger LOGGER = InternalLoggerFactory.getInstance(DefaultGroovyMethods.class.getName());
     private static final Integer ONE = 1;
     private static final BigInteger BI_INT_MAX = BigInteger.valueOf(Integer.MAX_VALUE);
     private static final BigInteger BI_INT_MIN = BigInteger.valueOf(Integer.MIN_VALUE);
@@ -520,7 +523,7 @@ public class DefaultGroovyMethods extends DefaultGroovyMethodsSupport {
             try {
                 props.put(mp.getName(), mp.getValue());
             } catch (Exception e) {
-                Logger.getLogger(DefaultGroovyMethods.class.getName()).throwing(self.getClass().getName(), "getProperty(" + mp.getName() + ")", e);
+                LOGGER.error("getProperty(" + mp.getName() + ")", e);
             }
         }
         return props;
