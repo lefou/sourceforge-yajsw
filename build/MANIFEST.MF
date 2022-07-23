@@ -3,15 +3,15 @@ Class-Path-Wrapper-Core:
  ./wrapperApp.jar 
  ./lib/core/permit/permit-reflect-0.4.jar 
  ./lib/core/yajsw/ahessian.jar 
- ./lib/core/netty/netty-codec-4.1.73.Final.jar 
- ./lib/core/netty/netty-handler-4.1.73.Final.jar 
- ./lib/core/netty/netty-transport-4.1.73.Final.jar 
- ./lib/core/netty/netty-buffer-4.1.73.Final.jar 
- ./lib/core/netty/netty-common-4.1.73.Final.jar 
- ./lib/core/netty/netty-resolver-4.1.73.Final.jar 
+ ./lib/core/netty/netty-codec-4.1.79.Final.jar 
+ ./lib/core/netty/netty-handler-4.1.79.Final.jar 
+ ./lib/core/netty/netty-transport-4.1.79.Final.jar 
+ ./lib/core/netty/netty-buffer-4.1.79.Final.jar 
+ ./lib/core/netty/netty-common-4.1.79.Final.jar 
+ ./lib/core/netty/netty-resolver-4.1.79.Final.jar 
  ./lib/core/jna/jna-5.10.0.jar 
  ./lib/core/jna/jna-platform-5.10.0.jar 
- ./lib/core/commons/commons-configuration2-2.7.jar 
+ ./lib/core/commons/commons-configuration2-2.8.0.jar 
  ./lib/core/commons/commons-text-1.9.jar 
  ./lib/core/commons/commons-vfs2-2.2.jar 
  ./lib/core/commons/commons-collections-3.2.2.jar 
@@ -53,14 +53,14 @@ Class-Path-App:
  ./wrapper.jar 
  ./lib/core/permit/permit-reflect-0.4.jar 
  ./lib/core/yajsw/ahessian.jar 
- ./lib/core/netty/netty-codec-4.1.73.Final.jar 
- ./lib/core/netty/netty-handler-4.1.73.Final.jar 
- ./lib/core/netty/netty-transport-4.1.73.Final.jar 
- ./lib/core/netty/netty-buffer-4.1.73.Final.jar 
- ./lib/core/netty/netty-common-4.1.73.Final.jar 
- ./lib/core/netty/netty-resolver-4.1.73.Final.jar 
+ ./lib/core/netty/netty-codec-4.1.79.Final.jar 
+ ./lib/core/netty/netty-handler-4.1.79.Final.jar 
+ ./lib/core/netty/netty-transport-4.1.79.Final.jar 
+ ./lib/core/netty/netty-buffer-4.1.79.Final.jar 
+ ./lib/core/netty/netty-common-4.1.79.Final.jar 
+ ./lib/core/netty/netty-resolver-4.1.79.Final.jar 
  ./lib/core/commons/commons-text-1.9.jar 
- ./lib/core/commons/commons-configuration2-2.7.jar  
+ ./lib/core/commons/commons-configuration2-2.8.0.jar  
  ./lib/core/commons/commons-vfs2-2.2.jar 
  ./lib/core/commons/commons-collections-3.2.2.jar 
  ./lib/core/commons/commons-io-2.11.0.jar 

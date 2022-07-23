@@ -10,3 +10,5 @@ Type=forking
 ExecStart=${w_start_cmd}
 ExecStop=${w_stop_cmd}
 
+[Install]
+WantedBy=multi-user.target

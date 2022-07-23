@@ -1050,12 +1050,18 @@ public class PosixProcess extends AbstractProcess {
 					int code = status.getValue();
 
 					// Exited Normally
-					//if (WIFEXITED(code) != 0)
+					if (WIFEXITED(code) != 0)
 						_exitCode = WEXITSTATUS(code);
+					else
+						_exitCode = -1;
 					// Exited Ab-Normally
 					//else
 					//	_exitCode = 0;
+					
+					if (WIFSIGNALED(code) != 0)
 						_exitSignal = WTERMSIG(code);
+					else
+						_exitSignal = -1;
 				}
 				if (_logger != null)
 					_logger.info("exit code posix process: "
@@ -1414,6 +1420,10 @@ public class PosixProcess extends AbstractProcess {
 	}
 
 	public int WIFEXITED(int code) {
+		return (code & 0xFF);
+	}
+
+	public int WIFSIGNALED(int code) {
 		return (code & 0xFF);
 	}
 

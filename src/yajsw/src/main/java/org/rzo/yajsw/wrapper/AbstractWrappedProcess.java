@@ -946,11 +946,13 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 			return false;
 		if (_startupExitCodes.contains(_osProcess.getExitCode()))
 		{
+			if (_debug > 0)
 			getWrapperLogger().info("restart process due to exit code rule");
 			return true;
 		}
 		else if (_exitCodeDefaultRestart)
 		{
+			if (_debug > 0)
 			getWrapperLogger().info(
 					"restart process due to default exit code rule");
 			return true;
@@ -965,11 +967,13 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 			return false;
 		if (_startupSignalCodes.contains(_osProcess.getExitSignal()))
 		{
+			if (_debug > 0)
 			getWrapperLogger().info("restart process due to signal code rule");
 			return true;
 		}
 		else if (_signalCodeDefaultRestart)
 		{
+			if (_debug > 0)
 			getWrapperLogger().info(
 					"restart process due to default signal code rule");
 			return true;
@@ -987,6 +991,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 	{
 		if (_shutdownExitCodes.contains(_osProcess.getExitCode()))
 		{
+			if (_debug > 0)
 			getWrapperLogger().info("shutdown wrapper due to exit code rule");
 			return true;
 		}
@@ -998,6 +1003,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 	{
 		if (_osProcess.getExitSignal() != -1 && _shutdownSignalCodes.contains(_osProcess.getExitSignal()))
 		{
+			if (_debug > 0)
 			getWrapperLogger().info("shutdown wrapper due to exit signal rule");
 			return true;
 		}
@@ -1009,6 +1015,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 	{
 		if (_stopExitCodes.contains(_osProcess.getExitCode()))
 		{
+			if (_debug > 0)
 			getWrapperLogger().info("stop process due to exit code rule");
 			return true;
 		}
@@ -1020,6 +1027,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 	{
 		if (_stopSignalCodes.contains(_osProcess.getExitSignal()))
 		{
+			if (_debug > 0)
 			getWrapperLogger().info("stop process due to exit signal rule");
 			return true;
 		}
@@ -2465,7 +2473,7 @@ public abstract class AbstractWrappedProcess implements WrappedProcess,
 		if (_restartCount < _config.getInt("wrapper.max_failed_invocations",
 				DEFAULT_MAX_FAILED_INVOCATIONS))
 			return true;
-		getWrapperLogger().info("too many restarts ");
+		getWrapperLogger().info("too many restarts: "+_restartCount);
 		return false;
 	}
 
