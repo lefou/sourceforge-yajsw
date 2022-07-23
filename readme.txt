@@ -1,7 +1,10 @@
-yajsw-stable-13.03
+yajsw-stable-13.04
 
-    * Update slf4j: 1.7.30
-    * Bug: Problem running jboss wildfly with jdk 11
+    * Update: commons configuration -> 2.8.0
+    * Update: netty -> 4.1.79
+    * Change: logging restart/shutdown rules
+    * Bug: posix: use WIFEXITED/WIFSIGNALED
+    * Bug: posix: service does not automatically start on boot
 
 Note: support the project by donating:
 
